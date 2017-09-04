@@ -1,0 +1,32 @@
+{
+"name": "spotify"
+, "path": "/usr/bin/spotify"
+, "reject_user_args": true
+, "xserver": {
+	"enabled": true
+	, "audio_mode": "pulseaudio"
+	, "enable_tray": false
+	, "tray_icon":"/home/user/spotify/usr/share/spotify/icons/spotify-linux-256.png"
+	, "notifications": true
+}
+, "networking":{
+	"type":"bridge"
+	,"bridge":"clear"
+}
+, "whitelist": [
+	{"path":"${HOME}/.config/spotify", "can_create":true}
+	, {"path": "/var/run/NetworkManager/", "target": "/run/resolvconf/", "force": true}
+        , {"path": "/opt/spotify/", "read_only": true}
+	, {"path":"/var/lib/oz/cells.d/spotify-whitelist.seccomp", "read_only": true}
+]
+, "blacklist": [
+]
+, "environment": [
+	{"name":"LD_LIBRARY_PATH", "value":"/opt/spotify/lib"}
+]
+, "seccomp": {
+        "mode":"whitelist"
+        , "whitelist":"/var/lib/oz/cells.d/spotify-whitelist.seccomp"
+        , "enforce":true
+}
+}
