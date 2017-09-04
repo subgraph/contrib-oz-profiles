@@ -1,0 +1,43 @@
+{
+"name": "chromium-i2p"
+, "path": "/usr/bin/chromium-i2p"
+, "reject_user_args": true
+, "default_params": [
+	"--disable-background-mode"
+	, "--disable-device-discovery"
+	, "--disable-gpu"
+	, "--proxy-server=127.0.0.1:4444"
+	, "--proxy-bypass-list=127.0.0.1",
+	"file:///usr/share/sgos/landing/i2p.html"
+]
+, "xserver": {
+	"enabled": true
+	, "audio_mode": "pulseaudio"
+	, "tray_icon":"/usr/share/icons/hicolor/256x256/apps/chronion.png"
+	, "notifications": true
+}
+, "networking":{
+	"type":"empty"
+	, "sockets": [
+		{"type":"client", "proto":"tcp", "port":4444},
+		{"type":"client", "proto":"tcp", "port":7657}
+	]
+}
+, "whitelist": [
+	{"path": "/etc/chromium.d/", "read_only": true, "ignore": true}
+	, {"path": "/usr/lib/chromium/chrome-sandbox", "allow_suid": true, "force": true}
+	, {"path": "/var/lib/dpkg/status", "read_only": true}
+	, {"path": "/var/lib/dpkg/updates/", "read_only": true}
+	, {"path": "/var/lib/dpkg/diversions", "read_only": true}
+]
+, "shared_folders": [
+	"${XDG_DOWNLOAD_DIR}"
+]
+, "blacklist": [
+]
+, "environment": [
+]
+, "seccomp": {
+	"mode":"disabled"
+}
+}
